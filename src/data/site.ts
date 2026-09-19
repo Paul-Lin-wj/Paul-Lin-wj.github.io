@@ -263,7 +263,7 @@ const en: Dict = {
         tag: 'Agents · Multi-agent',
         title: 'co-scientist-on-claude-code',
         sub: 'JavaScript',
-        desc: 'A Claude Code reproduction of Google Co-Scientist\'s multi-agent scientific-discovery loop: literature review → hypothesis generation → peer review → Elo tournament ranking → hypothesis evolution → meta-review, ending in a ranked hypothesis list and a full research overview.',
+        desc: 'A Claude Code reproduction of Google Co-Scientist\'s multi-agent scientific-discovery loop: seven specialist agents run literature review → hypothesis generation → peer review → Elo tournament ranking → hypothesis evolution → meta-review, ending in a ranked hypothesis list and a full research overview.',
         stack: ['JavaScript', 'Python', 'multi-agent', 'Elo'],
         href: 'https://github.com/Paul-Lin-wj/co-scientist-on-claude-code',
         go: 'View repository →',
