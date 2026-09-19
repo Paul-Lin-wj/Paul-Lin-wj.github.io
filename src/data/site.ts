@@ -109,7 +109,7 @@ const zh: Dict = {
         tag: 'Agent · 多智能体',
         title: 'co-scientist-on-claude-code',
         sub: 'JavaScript',
-        desc: '把 Google Co-Scientist 的多智能体科学发现流程复现到 Claude Code：文献综述 → 假设生成 → 同行评审 → Elo 锦标赛排名 → 假设进化 → 元评审，最终输出带排名的假设列表与完整研究概览。',
+        desc: '把 Google Co-Scientist 的多智能体科学发现流程复现到 Claude Code：7 个专门智能体组成"文献综述 → 假设生成 → 同行评审 → Elo 锦标赛排名 → 假设进化 → 元评审"循环，最终输出带排名的假设列表与完整研究概览。',
         stack: ['JavaScript', 'Python', 'multi-agent', 'Elo'],
         href: 'https://github.com/Paul-Lin-wj/co-scientist-on-claude-code',
         go: '查看仓库 →',
