@@ -47,9 +47,9 @@ const zh: Dict = {
     lede: '两个方向，一个共同点：让复杂过程的每一步都可追溯。',
     cards: [
       {
-        tag: 'JUNO · 物理分析',
-        title: '能量刻度的完整物理链路',
-        desc: '从 EDM 到 E_true = f(E_rec) 的完整链路：波形与事例重建、26B 能量修正、事例挑选、物理 QA、峰位拟合与非线性全局拟合。刻度源覆盖 Ge68 / Cs137 / Mn54 / Co60 / K40 五种单能源与 AmC 关联对三峰。',
+        tag: 'JUNO · 流程自动化',
+        title: '把能量刻度分析自动化',
+        desc: '把 JUNO ACU 伽马源刻度的整套分析流程自动化：从 EDM 到 E_true = f(E_rec)，覆盖波形与事例重建、26B 能量修正、事例挑选、物理 QA、峰位拟合与非线性全局拟合。刻度源覆盖 Ge68 / Cs137 / Mn54 / Co60 / K40 五种单能源与 AmC 关联对三峰。',
         bullets: [
           '五种单能源 + AmC 关联对三峰的挑选与拟合',
           '26B Finalcorrection 与非线性全局拟合',
@@ -191,9 +191,9 @@ const en: Dict = {
     lede: 'Two directions, one common thread: making every step of a complex process traceable.',
     cards: [
       {
-        tag: 'JUNO · Physics analysis',
-        title: 'The full energy-calibration chain',
-        desc: 'The complete chain from EDM to E_true = f(E_rec): waveform and event reconstruction, 26B energy correction, event selection, physics QA, peak fitting and global non-linearity fitting. Sources cover five single-energy gammas (Ge68 / Cs137 / Mn54 / Co60 / K40) plus the AmC coincidence triplets.',
+        tag: 'JUNO · Pipeline automation',
+        title: 'Automating the energy-calibration analysis',
+        desc: 'Automating the full JUNO ACU gamma-source calibration analysis: the chain from EDM to E_true = f(E_rec), covering waveform and event reconstruction, 26B energy correction, event selection, physics QA, peak fitting and global non-linearity fitting. Sources cover five single-energy gammas (Ge68 / Cs137 / Mn54 / Co60 / K40) plus the AmC coincidence triplets.',
         bullets: [
           'Selection and fitting for five single-energy sources + AmC triplets',
           '26B Finalcorrection and global non-linearity fitting',
