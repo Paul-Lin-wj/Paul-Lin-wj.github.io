@@ -12,7 +12,8 @@ type Dict = {
   htmlLang: string;
   nav: { research: string; projects: string; about: string; other: string; otherHref: string };
   hero: {
-    kicker: string; nameZh: string; nameEn: string; lede: string; mission: string;
+    kicker: string; namePrimary: string; nameSecondary: string | null;
+    lede: string; mission: string;
     chips: string[]; email: string; github: string; ctaAbout: string; ctaProjects: string;
   };
   research: { kicker: string; title: string; lede: string; cards: Card[] };
@@ -31,9 +32,9 @@ const zh: Dict = {
   nav: { research: '研究方向', projects: '项目', about: '关于', other: 'English', otherHref: '/en/' },
   hero: {
     kicker: '武汉大学 · 物理科学与技术学院 · 微电子科学与工程',
-    nameZh: '林晖洋',
-    nameEn: 'Huiyang Lin',
-    lede: '中微子物理 × 可审计的自动化',
+    namePrimary: '林晖洋',
+    nameSecondary: 'Huiyang Lin',
+    lede: 'AI Agent × 可审计的自动化',
     mission: '我为 JUNO 中微子实验构建能量刻度流水线，并让 agent 的自动化过程可追溯、可控制。',
     chips: ['JUNO 能量刻度', '可复现流水线', 'Agent 工具链', 'Android 自动化'],
     email: 'Email',
@@ -181,9 +182,9 @@ const en: Dict = {
   nav: { research: 'Research', projects: 'Projects', about: 'About', other: '中文', otherHref: '/' },
   hero: {
     kicker: 'Wuhan University · School of Physics and Technology · Microelectronics',
-    nameZh: 'Huiyang Lin',
-    nameEn: '林晖洋',
-    lede: 'Neutrino physics × auditable automation',
+    namePrimary: 'Huiyang Lin',
+    nameSecondary: null,
+    lede: 'AI agents × auditable automation',
     mission: 'I build energy-calibration pipelines for the JUNO neutrino experiment, and make agent automation traceable and controllable.',
     chips: ['JUNO calibration', 'Reproducible pipelines', 'Agent tooling', 'Android automation'],
     email: 'Email',

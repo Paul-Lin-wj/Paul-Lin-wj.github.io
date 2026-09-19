@@ -9,14 +9,15 @@ interface Props {
 }
 const { lang, title, description } = Astro.props;
 const t = dicts[lang];
-const base = lang === 'zh' ? '' : '/en';
+
+// 英文是默认语言，挂在根路径；中文在 /zh 下
+const base = lang === 'zh' ? '/zh' : '';
 
 // 语言切换：停在当前页面的对应语言版本，而不是一律回首页
 const path = Astro.url.pathname;
-const otherHref =
-  lang === 'zh'
-    ? `/en${path === '/' ? '/' : path}`
-    : path.replace(/^\/en/, '') || '/';
+const zhPath = lang === 'zh' ? path : path === '/' ? '/zh/' : `/zh${path}`;
+const enPath = lang === 'zh' ? path.replace(/^\/zh/, '') || '/' : path;
+const otherHref = lang === 'zh' ? enPath : zhPath;
 
 const name = lang === 'zh' ? '林晖洋' : 'Huiyang Lin';
 const fullTitle = `${title} — ${name}`;
@@ -32,8 +33,8 @@ const fullTitle = `${title} — ${name}`;
     <meta name="author" content="Huiyang Lin" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
-    <link rel="alternate" hreflang="zh-CN" href={new URL(path.replace(/^\/en/, '') || '/', Astro.site)} />
-    <link rel="alternate" hreflang="en" href={new URL(`/en${path.replace(/^\/en/, '')}`, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(enPath, Astro.site)} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(zhPath, Astro.site)} />
   </head>
 
   <body>

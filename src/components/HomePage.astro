@@ -7,7 +7,7 @@ import { dicts, site, type Lang } from '../data/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = dicts[lang];
-const base = lang === 'zh' ? '' : '/en';
+const base = lang === 'zh' ? '/zh' : '';
 
 const [ledeA, ledeB] = t.hero.lede.split(' × ');
 ---
@@ -24,8 +24,8 @@ const [ledeA, ledeB] = t.hero.lede.split(' × ');
       <p class="kicker">{t.hero.kicker}</p>
 
       <h1>
-        <span class="zh">{t.hero.nameZh}</span>
-        <span class="en">{t.hero.nameEn}</span>
+        <span class="name-primary">{t.hero.namePrimary}</span>
+        {t.hero.nameSecondary && <span class="name-secondary">{t.hero.nameSecondary}</span>}
       </h1>
 
       <p class="lede">{ledeA} <span class="x">×</span> {ledeB}</p>
@@ -80,20 +80,6 @@ const [ledeA, ledeB] = t.hero.lede.split(' × ');
       </div>
       <div class="cta" style="margin-top:26px">
         <a href={`${base}/projects`}>{t.projects.more} <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="about">
-    <div class="wrap">
-      <p class="sec-kicker">{t.about.kicker}</p>
-      <h2>{t.about.title}</h2>
-      <p class="sec-lede">{t.about.lead}</p>
-      <div class="prose">
-        {t.about.body.map((p) => <p>{p}</p>)}
-      </div>
-      <div class="cta" style="margin-top:26px">
-        <a href={`${base}/about`}>{t.about.more} <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
