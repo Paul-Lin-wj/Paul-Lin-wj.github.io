@@ -6,7 +6,7 @@ export const site = {
 
 export type Lang = 'zh' | 'en';
 
-type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string };
+type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string; subs?: { label: string; href: string }[] };
 
 type Dict = {
   htmlLang: string;
@@ -82,23 +82,18 @@ const zh: Dict = {
         stack: ['Python', 'JUNO', 'calibration'],
         href: 'https://github.com/Paul-Lin-wj/juno-acu-energy-calibration-pipeline',
         go: '查看仓库 →',
+        subs: [
+          { label: 'standalone_esd2npz — EDM/ESD → npz，每次运行留档代码快照与全部 cut 条件', href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz' },
+          { label: 'juno_calibration_acu_gamma_source — MC 模板最小二乘能谱拟合与峰位提取', href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source' },
+        ],
       },
       {
-        tag: '可复现性 · 流水线',
-        title: 'standalone_esd2npz',
+        tag: '物理 × Agent',
+        title: 'jbench_plank2018',
         sub: 'Python',
-        desc: '把 JUNO 刻度数据从 EDM/ESD 处理成 fitter 可直接使用的 npz。每次运行自动留档代码快照、全部 cut 条件与物理 QA 图。',
-        stack: ['Python', 'provenance', 'audit'],
-        href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz',
-        go: '查看仓库 →',
-      },
-      {
-        tag: 'JUNO · 拟合',
-        title: 'juno_calibration_acu_gamma_source',
-        sub: 'Python',
-        desc: '基于 JUNO MC 模板的最小二乘能量谱拟合工具，支持多种刻度源的能量谱分解与峰位提取。',
-        stack: ['Python', 'χ² fit', 'MC template'],
-        href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source',
+        desc: 'Planck 2018 CMB 基准：用宇宙学参数推断来测 AI agent 的物理推理能力。CAMB 理论谱 + 银河前景 + 仪器噪声，参数在 Planck 2018 ±3σ 内随机采样防止背题；真值由评分系统独占，agent 不可见。',
+        stack: ['Python', 'CAMB', 'benchmark', 'agent'],
+        href: 'https://github.com/Paul-Lin-wj/jbench_plank2018',
         go: '查看仓库 →',
       },
       {
@@ -108,6 +103,15 @@ const zh: Dict = {
         desc: 'Android 手机操控 agent 扩展：受约束的工具面 + 多层安全防线 + 红队实测。配套常显任务横幅，全程可暂停、可终止。',
         stack: ['TypeScript', 'agent', 'safety'],
         href: 'https://github.com/Paul-Lin-wj/pi-phone-control',
+        go: '查看仓库 →',
+      },
+      {
+        tag: '工具 · Linux 移植',
+        title: 'CS_switch',
+        sub: 'Python',
+        desc: 'CSSwitch 的 Linux CLI 移植版：把 Claude Science 的登录与模型推理解耦，让科研 agent 可接入任意 OpenAI 兼容端点。含多 provider 适配层、用户级安装脚本与 .deb 打包。',
+        stack: ['Python', 'CLI', 'proxy', 'packaging'],
+        href: 'https://github.com/Paul-Lin-wj/CS_switch',
         go: '查看仓库 →',
       },
     ],
@@ -232,23 +236,18 @@ const en: Dict = {
         stack: ['Python', 'JUNO', 'calibration'],
         href: 'https://github.com/Paul-Lin-wj/juno-acu-energy-calibration-pipeline',
         go: 'View repository →',
+        subs: [
+          { label: 'standalone_esd2npz — EDM/ESD → npz, archiving a code snapshot and every cut on each run', href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz' },
+          { label: 'juno_calibration_acu_gamma_source — least-squares MC-template spectrum fitter and peak extraction', href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source' },
+        ],
       },
       {
-        tag: 'Reproducibility · Pipeline',
-        title: 'standalone_esd2npz',
+        tag: 'Physics × Agents',
+        title: 'jbench_plank2018',
         sub: 'Python',
-        desc: 'Turns JUNO calibration data from EDM/ESD into npz files ready for the fitter. Every run archives a code snapshot, all cut conditions and physics QA plots.',
-        stack: ['Python', 'provenance', 'audit'],
-        href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz',
-        go: 'View repository →',
-      },
-      {
-        tag: 'JUNO · Fitting',
-        title: 'juno_calibration_acu_gamma_source',
-        sub: 'Python',
-        desc: 'Least-squares energy-spectrum fitter built on JUNO MC templates, supporting spectrum decomposition and peak extraction for multiple calibration sources.',
-        stack: ['Python', 'χ² fit', 'MC template'],
-        href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source',
+        desc: 'A Planck 2018 CMB benchmark that tests an AI agent\'s physics reasoning through cosmological parameter inference. CAMB theory spectra plus galactic foregrounds and instrument noise, with parameters sampled randomly within Planck 2018 ±3σ so the task cannot be memorised; ground truth is held by the scoring system and never shown to the agent.',
+        stack: ['Python', 'CAMB', 'benchmark', 'agent'],
+        href: 'https://github.com/Paul-Lin-wj/jbench_plank2018',
         go: 'View repository →',
       },
       {
@@ -258,6 +257,15 @@ const en: Dict = {
         desc: 'An Android phone-control agent extension: constrained tool surface, layered defences, red-teamed. Ships with an always-visible task banner that can be paused or stopped.',
         stack: ['TypeScript', 'agent', 'safety'],
         href: 'https://github.com/Paul-Lin-wj/pi-phone-control',
+        go: 'View repository →',
+      },
+      {
+        tag: 'Tooling · Linux port',
+        title: 'CS_switch',
+        sub: 'Python',
+        desc: 'The Linux CLI port of CSSwitch: decouples Claude Science\'s sign-in from model inference so a research agent can be pointed at any OpenAI-compatible endpoint. Includes a multi-provider adapter layer, a per-user installer and .deb packaging.',
+        stack: ['Python', 'CLI', 'proxy', 'packaging'],
+        href: 'https://github.com/Paul-Lin-wj/CS_switch',
         go: 'View repository →',
       },
     ],

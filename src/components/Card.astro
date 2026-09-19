@@ -8,15 +8,28 @@ interface Props {
   stack?: string[];
   href?: string;
   go?: string;
+  subs?: { label: string; href: string }[];
 }
-const { tag, title, sub, desc, bullets, stack, href, go } = Astro.props;
-const external = href?.startsWith('http');
+const { tag, title, sub, desc, bullets, stack, href, go, subs } = Astro.props;
+const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 ---
 
 {
-  href ? (
-    <a class="card" href={href} target={external ? '_blank' : undefined}
-       rel={external ? 'noopener noreferrer' : undefined}>
+  subs?.length ? (
+    // 有子项目时不能整卡套链接（<a> 不能嵌套），改成标题与子项目各自成链
+    <div class="card">
+      <p class="tag">{tag}</p>
+      <h3><a {...ext(href)} href={href}>{title}</a>{sub && <span class="sub">{sub}</span>}</h3>
+      <p>{desc}</p>
+      {bullets && <ul>{bullets.map((b) => <li>{b}</li>)}</ul>}
+      {stack && <div class="stack">{stack.map((s) => <span>{s}</span>)}</div>}
+      <ul class="subs">
+        {subs.map((s) => <li><a {...ext(s.href)} href={s.href}>{s.label}</a></li>)}
+      </ul>
+      {go && <div class="go"><a {...ext(href)} href={href}>{go}</a></div>}
+    </div>
+  ) : href ? (
+    <a class="card" href={href} {...ext(href)}>
       <p class="tag">{tag}</p>
       <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
       <p>{desc}</p>

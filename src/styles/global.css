@@ -187,6 +187,19 @@ img { max-width: 100%; display: block; }
 .card ul { margin: 12px 0 0; padding-left: 17px; }
 .card ul li { font-size: 14px; color: var(--fg-3); margin-bottom: 5px; }
 .card ul li::marker { color: var(--accent); }
+.card h3 a:hover { color: var(--accent); }
+/* 子项目：用左侧竖线表示从属于上面这张卡 */
+.card ul.subs {
+  list-style: none; margin: 14px 0 0; padding: 0 0 0 12px;
+  border-left: 2px solid var(--border-2);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.card ul.subs li { font-size: 13px; margin: 0; }
+.card ul.subs a {
+  color: var(--fg-3); text-decoration: underline;
+  text-decoration-color: var(--border-2); text-underline-offset: 3px;
+}
+.card ul.subs a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .card .stack {
   margin-top: auto; padding-top: 15px;
   display: flex; flex-wrap: wrap; gap: 7px;
