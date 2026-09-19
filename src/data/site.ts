@@ -18,7 +18,6 @@ type Dict = {
   };
   research: { kicker: string; title: string; lede: string; cards: Card[] };
   projects: { kicker: string; title: string; lede: string; cards: Card[]; tooling: Card[]; more: string };
-  about: { body: string[] };
   footer: { built: string; source: string };
   projectsPage: { title: string; lede: string; research: string; tooling: string };
   aboutPage: {
@@ -145,11 +144,6 @@ const zh: Dict = {
       },
     ],
     more: '全部项目 →',
-  },
-  about: {
-    body: [
-      '物理这边，流水线的每次运行都留档代码快照与全部挑选条件，保证结果能逐位溯源；工程那边，agent 的每一个动作都被约束在明确的工具面里，越权会被拦下。',
-    ],
   },
   footer: { built: 'Built with Astro', source: '源码' },
   projectsPage: {
@@ -294,11 +288,6 @@ const en: Dict = {
       },
     ],
     more: 'All projects →',
-  },
-  about: {
-    body: [
-      'In physics, every pipeline run archives a code snapshot and all selection conditions so results can be traced bit-for-bit. In engineering, every agent action is confined to an explicit tool surface, and anything out of bounds is blocked.',
-    ],
   },
   footer: { built: 'Built with Astro', source: 'Source' },
   projectsPage: {
