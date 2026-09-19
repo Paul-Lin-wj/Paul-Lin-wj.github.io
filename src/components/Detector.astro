@@ -1,0 +1,43 @@
+---
+// 与 GitHub profile banner 同源的探测器图案：同心环 + 仪表化壳层
+interface Props { size?: number }
+const { size = 340 } = Astro.props;
+
+const CX = 170, CY = 170;
+const rings = [
+  { r: 100, op: 0.30 },
+  { r: 78, op: 0.19 },
+  { r: 56, op: 0.13 },
+  { r: 34, op: 0.09 },
+];
+const pmts = Array.from({ length: 20 }, (_, i) => {
+  const a = (2 * Math.PI * i) / 20 - Math.PI / 2;
+  return { x: (CX + 78 * Math.cos(a)).toFixed(1), y: (CY + 78 * Math.sin(a)).toFixed(1) };
+});
+---
+
+<svg class="detector" width={size} height={size} viewBox="0 0 340 340"
+     fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <radialGradient id="dglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4d8fe0" stop-opacity="0.20" />
+      <stop offset="60%" stop-color="#3d78c8" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#2a5da8" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="dcore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.01" />
+    </radialGradient>
+  </defs>
+
+  <circle cx={CX} cy={CY} r="165" fill="url(#dglow)" />
+  <circle cx={CX} cy={CY} r="100" fill="url(#dcore)" />
+
+  {rings.map(({ r, op }) => (
+    <circle cx={CX} cy={CY} r={r} stroke="#58a6ff" stroke-opacity={op} stroke-width="1" />
+  ))}
+
+  {pmts.map(({ x, y }) => (
+    <circle cx={x} cy={y} r="3" fill="#7ee0c8" fill-opacity="0.6" />
+  ))}
+</svg>

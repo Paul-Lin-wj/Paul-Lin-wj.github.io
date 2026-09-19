@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from './Card.astro';
+import { dicts, type Lang } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = dicts[lang];
+---
+
+<BaseLayout lang={lang} title={t.projectsPage.title} description={t.projectsPage.lede}>
+  <div class="page wrap">
+    <h1>{t.projectsPage.title}</h1>
+    <p class="lede">{t.projectsPage.lede}</p>
+
+    <p class="sec-kicker">01 — {t.projectsPage.research}</p>
+    <div class="cards two" style="margin-top:20px">
+      {t.projects.cards.map((c) => <Card {...c} />)}
+    </div>
+
+    <p class="sec-kicker" style="margin-top:56px">02 — {t.projectsPage.tooling}</p>
+    <div class="cards three" style="margin-top:20px">
+      {t.projects.tooling.map((c) => <Card {...c} />)}
+    </div>
+  </div>
+</BaseLayout>

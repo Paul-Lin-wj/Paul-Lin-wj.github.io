@@ -1,0 +1,37 @@
+---
+interface Props {
+  tag: string;
+  title: string;
+  sub?: string;
+  desc: string;
+  bullets?: string[];
+  stack?: string[];
+  href?: string;
+  go?: string;
+}
+const { tag, title, sub, desc, bullets, stack, href, go } = Astro.props;
+const external = href?.startsWith('http');
+---
+
+{
+  href ? (
+    <a class="card" href={href} target={external ? '_blank' : undefined}
+       rel={external ? 'noopener noreferrer' : undefined}>
+      <p class="tag">{tag}</p>
+      <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
+      <p>{desc}</p>
+      {bullets && <ul>{bullets.map((b) => <li>{b}</li>)}</ul>}
+      {stack && <div class="stack">{stack.map((s) => <span>{s}</span>)}</div>}
+      {go && <div class="go">{go}</div>}
+    </a>
+  ) : (
+    <div class="card">
+      <p class="tag">{tag}</p>
+      <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
+      <p>{desc}</p>
+      {bullets && <ul>{bullets.map((b) => <li>{b}</li>)}</ul>}
+      {stack && <div class="stack">{stack.map((s) => <span>{s}</span>)}</div>}
+      {go && <div class="go">{go}</div>}
+    </div>
+  )
+}

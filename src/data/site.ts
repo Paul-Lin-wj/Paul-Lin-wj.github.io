@@ -1,0 +1,330 @@
+export const site = {
+  email: 'muad.dib.lin@gmail.com',
+  github: 'https://github.com/Paul-Lin-wj',
+  profileReadme: 'https://github.com/Paul-Lin-wj',
+};
+
+export type Lang = 'zh' | 'en';
+
+type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string };
+
+type Dict = {
+  htmlLang: string;
+  nav: { research: string; projects: string; about: string; other: string; otherHref: string };
+  hero: {
+    kicker: string; nameZh: string; nameEn: string; lede: string; mission: string;
+    chips: string[]; email: string; github: string; ctaAbout: string; ctaProjects: string;
+  };
+  research: { kicker: string; title: string; lede: string; cards: Card[] };
+  projects: { kicker: string; title: string; lede: string; cards: Card[]; tooling: Card[]; more: string };
+  about: { kicker: string; title: string; lead: string; body: string[]; more: string };
+  footer: { built: string; source: string };
+  projectsPage: { title: string; lede: string; research: string; tooling: string };
+  aboutPage: {
+    title: string; lede: string; eduTitle: string; edu: [string, string][];
+    focusTitle: string; focus: string[]; contactTitle: string; contact: string;
+  };
+};
+
+const zh: Dict = {
+  htmlLang: 'zh-CN',
+  nav: { research: '研究方向', projects: '项目', about: '关于', other: 'English', otherHref: '/en/' },
+  hero: {
+    kicker: '武汉大学 · 物理科学与技术学院 · 微电子科学与工程',
+    nameZh: '林晖洋',
+    nameEn: 'Huiyang Lin',
+    lede: '中微子物理 × 可审计的自动化',
+    mission: '我为 JUNO 中微子实验构建能量刻度流水线，并让 agent 的自动化过程可追溯、可控制。',
+    chips: ['JUNO 能量刻度', '可复现流水线', 'Agent 工具链', 'Android 自动化'],
+    email: 'Email',
+    github: 'GitHub',
+    ctaAbout: '更多关于我',
+    ctaProjects: '查看项目',
+  },
+  research: {
+    kicker: '01 — Research',
+    title: '研究方向',
+    lede: '两个方向，一个共同点：让复杂过程的每一步都可追溯。',
+    cards: [
+      {
+        tag: 'JUNO · 物理分析',
+        title: '能量刻度的完整物理链路',
+        desc: '从 EDM 到 E_true = f(E_rec) 的完整链路：波形与事例重建、26B 能量修正、事例挑选、物理 QA、峰位拟合与非线性全局拟合。刻度源覆盖 Ge68 / Cs137 / Mn54 / Co60 / K40 五种单能源与 AmC 关联对三峰。',
+        bullets: [
+          '五种单能源 + AmC 关联对三峰的挑选与拟合',
+          '26B Finalcorrection 与非线性全局拟合',
+          '每一步挑选条件都留档可查',
+        ],
+      },
+      {
+        tag: 'Agent · 工程',
+        title: '可审计的自动化',
+        desc: '让不可信的自动化过程变得可追溯、可控制。物理流水线每次运行留档代码快照与全部 cut 条件；手机操控 agent 用白名单工具面与多层防线约束模型行为。',
+        bullets: [
+          '每次运行产出代码快照（含 sha256）与完整性审计',
+          '工具面白名单 + 受保护应用黑名单',
+          '红队三轮实测的防线验证',
+        ],
+      },
+    ],
+  },
+  projects: {
+    kicker: '02 — Projects',
+    title: '项目',
+    lede: '科研流水线与工具链。全部代码在 GitHub 上公开。',
+    cards: [
+      {
+        tag: 'JUNO · 物理分析',
+        title: 'juno-acu-energy-calibration-pipeline',
+        sub: 'Python',
+        desc: 'JUNO ACU 伽马源刻度数据处理流水线，覆盖 EDM → E_true = f(E_rec) 主链，含事例挑选、物理 QA、峰位拟合与非线性全局拟合。',
+        stack: ['Python', 'JUNO', 'calibration'],
+        href: 'https://github.com/Paul-Lin-wj/juno-acu-energy-calibration-pipeline',
+        go: '查看仓库 →',
+      },
+      {
+        tag: '可复现性 · 流水线',
+        title: 'standalone_esd2npz',
+        sub: 'Python',
+        desc: '把 JUNO 刻度数据从 EDM/ESD 处理成 fitter 可直接使用的 npz。每次运行自动留档代码快照、全部 cut 条件与物理 QA 图。',
+        stack: ['Python', 'provenance', 'audit'],
+        href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz',
+        go: '查看仓库 →',
+      },
+      {
+        tag: 'JUNO · 拟合',
+        title: 'juno_calibration_acu_gamma_source',
+        sub: 'Python',
+        desc: '基于 JUNO MC 模板的最小二乘能量谱拟合工具，支持多种刻度源的能量谱分解与峰位提取。',
+        stack: ['Python', 'χ² fit', 'MC template'],
+        href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source',
+        go: '查看仓库 →',
+      },
+      {
+        tag: 'Agent · 工具链',
+        title: 'pi-phone-control',
+        sub: 'TypeScript',
+        desc: 'Android 手机操控 agent 扩展：受约束的工具面 + 多层安全防线 + 红队实测。配套常显任务横幅，全程可暂停、可终止。',
+        stack: ['TypeScript', 'agent', 'safety'],
+        href: 'https://github.com/Paul-Lin-wj/pi-phone-control',
+        go: '查看仓库 →',
+      },
+    ],
+    tooling: [
+      {
+        tag: 'Agent · 配套件',
+        title: 'android-task-banner',
+        sub: 'Java',
+        desc: 'agent 手机任务的常显进度横幅，带暂停与终止按钮。按钮指令带新鲜度校验，残留点击会被下一个任务自动丢弃。',
+        stack: ['Java', 'Android', 'overlay'],
+        href: 'https://github.com/Paul-Lin-wj/android-task-banner',
+        go: '查看仓库 →',
+      },
+      {
+        tag: 'Agent · 科研',
+        title: 'co-scientist-on-claude-code',
+        sub: 'JavaScript',
+        desc: 'Google Co-Scientist 多智能体科学发现系统的 Claude Code 复现：文献综述、假设生成、同行评审、Elo 锦标赛排名与假设进化。',
+        stack: ['JavaScript', 'multi-agent', 'Elo'],
+        href: 'https://github.com/Paul-Lin-wj/co-scientist-on-claude-code',
+        go: '查看仓库 →',
+      },
+      {
+        tag: '知识库',
+        title: 'TransformerWiki',
+        sub: 'Python',
+        desc: 'Transformer 模型优化的结构化知识库，打包为 Claude Code skill：注意力机制、训练策略、推理服务、量化与 kernel 级优化。',
+        stack: ['Python', 'knowledge base'],
+        href: 'https://github.com/Paul-Lin-wj/TransformerWiki',
+        go: '查看仓库 →',
+      },
+    ],
+    more: '全部项目 →',
+  },
+  about: {
+    kicker: '03 — About',
+    title: '关于',
+    lead: '武汉大学物理科学与技术学院本科生，微电子科学与工程方向，2023 年入学。',
+    body: [
+      '目前在 JUNO（江门中微子实验）方向做能量刻度相关的数据分析工作，同时折腾 agent 工具链——两条线看起来不相干，但我在两边做的是同一件事：让自动化过程变得可追溯、可控制。',
+      '物理这边，流水线的每次运行都留档代码快照与全部挑选条件，保证结果能逐位溯源；工程那边，agent 的每一个动作都被约束在明确的工具面里，越权会被拦下。',
+    ],
+    more: '完整介绍 →',
+  },
+  footer: { built: 'Built with Astro', source: '源码' },
+  projectsPage: {
+    title: '项目',
+    lede: '科研流水线与工具链。全部代码在 GitHub 上公开。',
+    research: '科研流水线',
+    tooling: '工具链',
+  },
+  aboutPage: {
+    title: '关于',
+    lede: '武汉大学物理科学与技术学院本科生，微电子科学与工程方向。',
+    eduTitle: '教育背景',
+    edu: [
+      ['2023 — 至今', '武汉大学 · 物理科学与技术学院 · 微电子科学与工程'],
+    ],
+    focusTitle: '方向',
+    focus: [
+      'JUNO 中微子实验的能量刻度数据分析：从原始数据到非线性曲线的完整链路',
+      '科研流水线的可复现与可审计：代码快照、cut 条件留档、完整性校验',
+      'Agent 工具链的约束与安全：受控工具面、多层防线、红队验证',
+    ],
+    contactTitle: '联系',
+    contact: '技术讨论、合作或任何问题，欢迎邮件联系。',
+  },
+};
+
+const en: Dict = {
+  htmlLang: 'en',
+  nav: { research: 'Research', projects: 'Projects', about: 'About', other: '中文', otherHref: '/' },
+  hero: {
+    kicker: 'Wuhan University · School of Physics and Technology · Microelectronics',
+    nameZh: 'Huiyang Lin',
+    nameEn: '林晖洋',
+    lede: 'Neutrino physics × auditable automation',
+    mission: 'I build energy-calibration pipelines for the JUNO neutrino experiment, and make agent automation traceable and controllable.',
+    chips: ['JUNO calibration', 'Reproducible pipelines', 'Agent tooling', 'Android automation'],
+    email: 'Email',
+    github: 'GitHub',
+    ctaAbout: 'More about me',
+    ctaProjects: 'View projects',
+  },
+  research: {
+    kicker: '01 — Research',
+    title: 'Research',
+    lede: 'Two directions, one common thread: making every step of a complex process traceable.',
+    cards: [
+      {
+        tag: 'JUNO · Physics analysis',
+        title: 'The full energy-calibration chain',
+        desc: 'The complete chain from EDM to E_true = f(E_rec): waveform and event reconstruction, 26B energy correction, event selection, physics QA, peak fitting and global non-linearity fitting. Sources cover five single-energy gammas (Ge68 / Cs137 / Mn54 / Co60 / K40) plus the AmC coincidence triplets.',
+        bullets: [
+          'Selection and fitting for five single-energy sources + AmC triplets',
+          '26B Finalcorrection and global non-linearity fitting',
+          'Every selection cut is recorded and auditable',
+        ],
+      },
+      {
+        tag: 'Agents · Engineering',
+        title: 'Auditable automation',
+        desc: 'Making untrusted automation traceable and controllable. The physics pipeline archives a code snapshot and all cut conditions on every run; the phone-control agent constrains model behaviour through a whitelisted tool surface and layered defences.',
+        bullets: [
+          'Per-run code snapshot (with sha256) and integrity audit',
+          'Whitelisted tool surface + protected-app blacklist',
+          'Defences validated by three rounds of red-teaming',
+        ],
+      },
+    ],
+  },
+  projects: {
+    kicker: '02 — Projects',
+    title: 'Projects',
+    lede: 'Research pipelines and tooling. All source is public on GitHub.',
+    cards: [
+      {
+        tag: 'JUNO · Physics analysis',
+        title: 'juno-acu-energy-calibration-pipeline',
+        sub: 'Python',
+        desc: 'Gamma-source calibration pipeline for the JUNO ACU, covering the EDM → E_true = f(E_rec) chain with event selection, physics QA, peak fitting and global non-linearity fitting.',
+        stack: ['Python', 'JUNO', 'calibration'],
+        href: 'https://github.com/Paul-Lin-wj/juno-acu-energy-calibration-pipeline',
+        go: 'View repository →',
+      },
+      {
+        tag: 'Reproducibility · Pipeline',
+        title: 'standalone_esd2npz',
+        sub: 'Python',
+        desc: 'Turns JUNO calibration data from EDM/ESD into npz files ready for the fitter. Every run archives a code snapshot, all cut conditions and physics QA plots.',
+        stack: ['Python', 'provenance', 'audit'],
+        href: 'https://github.com/Paul-Lin-wj/standalone_esd2npz',
+        go: 'View repository →',
+      },
+      {
+        tag: 'JUNO · Fitting',
+        title: 'juno_calibration_acu_gamma_source',
+        sub: 'Python',
+        desc: 'Least-squares energy-spectrum fitter built on JUNO MC templates, supporting spectrum decomposition and peak extraction for multiple calibration sources.',
+        stack: ['Python', 'χ² fit', 'MC template'],
+        href: 'https://github.com/Paul-Lin-wj/juno_calibration_acu_gamma_source',
+        go: 'View repository →',
+      },
+      {
+        tag: 'Agents · Tooling',
+        title: 'pi-phone-control',
+        sub: 'TypeScript',
+        desc: 'An Android phone-control agent extension: constrained tool surface, layered defences, red-teamed. Ships with an always-visible task banner that can be paused or stopped.',
+        stack: ['TypeScript', 'agent', 'safety'],
+        href: 'https://github.com/Paul-Lin-wj/pi-phone-control',
+        go: 'View repository →',
+      },
+    ],
+    tooling: [
+      {
+        tag: 'Agents · Companion',
+        title: 'android-task-banner',
+        sub: 'Java',
+        desc: 'An always-visible progress banner for agent tasks on Android, with pause and stop buttons. Button commands carry freshness checks, so stale taps are dropped by the next task.',
+        stack: ['Java', 'Android', 'overlay'],
+        href: 'https://github.com/Paul-Lin-wj/android-task-banner',
+        go: 'View repository →',
+      },
+      {
+        tag: 'Agents · Science',
+        title: 'co-scientist-on-claude-code',
+        sub: 'JavaScript',
+        desc: 'A Claude Code reproduction of Google Co-Scientist: literature review, hypothesis generation, peer review, Elo tournament ranking and hypothesis evolution.',
+        stack: ['JavaScript', 'multi-agent', 'Elo'],
+        href: 'https://github.com/Paul-Lin-wj/co-scientist-on-claude-code',
+        go: 'View repository →',
+      },
+      {
+        tag: 'Knowledge base',
+        title: 'TransformerWiki',
+        sub: 'Python',
+        desc: 'A structured knowledge base on Transformer optimisation, packaged as a Claude Code skill: attention mechanisms, training strategies, inference serving, quantisation and kernel-level work.',
+        stack: ['Python', 'knowledge base'],
+        href: 'https://github.com/Paul-Lin-wj/TransformerWiki',
+        go: 'View repository →',
+      },
+    ],
+    more: 'All projects →',
+  },
+  about: {
+    kicker: '03 — About',
+    title: 'About',
+    lead: 'Undergraduate at Wuhan University, School of Physics and Technology, majoring in Microelectronics (enrolled 2023).',
+    body: [
+      'I currently work on energy-calibration data analysis for JUNO (Jiangmen Underground Neutrino Observatory), and I also build agent tooling. The two look unrelated, but I am doing the same thing on both sides: making automation traceable and controllable.',
+      'In physics, every pipeline run archives a code snapshot and all selection conditions so results can be traced bit-for-bit. In engineering, every agent action is confined to an explicit tool surface, and anything out of bounds is blocked.',
+    ],
+    more: 'Full profile →',
+  },
+  footer: { built: 'Built with Astro', source: 'Source' },
+  projectsPage: {
+    title: 'Projects',
+    lede: 'Research pipelines and tooling. All source is public on GitHub.',
+    research: 'Research pipelines',
+    tooling: 'Tooling',
+  },
+  aboutPage: {
+    title: 'About',
+    lede: 'Undergraduate at Wuhan University, School of Physics and Technology.',
+    eduTitle: 'Education',
+    edu: [
+      ['2023 — present', 'Wuhan University · School of Physics and Technology · Microelectronics'],
+    ],
+    focusTitle: 'Focus',
+    focus: [
+      'Energy-calibration analysis for the JUNO neutrino experiment — the full chain from raw data to the non-linearity curve',
+      'Reproducible and auditable research pipelines: code snapshots, recorded cut conditions, integrity checks',
+      'Constraint and safety for agent tooling: controlled tool surfaces, layered defences, red-team validation',
+    ],
+    contactTitle: 'Contact',
+    contact: 'For technical discussion, collaboration, or anything else — email is best.',
+  },
+};
+
+export const dicts: Record<Lang, Dict> = { zh, en };
+export const otherLang: Record<Lang, Lang> = { zh: 'en', en: 'zh' };

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { dicts, site, type Lang } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = dicts[lang];
+---
+
+<BaseLayout lang={lang} title={t.aboutPage.title} description={t.aboutPage.lede}>
+  <div class="page wrap">
+    <h1>{t.aboutPage.title}</h1>
+    <p class="lede">{t.aboutPage.lede}</p>
+
+    <div class="prose">
+      {t.about.body.map((p) => <p>{p}</p>)}
+
+      <h2>{t.aboutPage.eduTitle}</h2>
+      <dl class="meta-row">
+        {t.aboutPage.edu.map(([when, what]) => (
+          <>
+            <dt>{when}</dt>
+            <dd>{what}</dd>
+          </>
+        ))}
+      </dl>
+
+      <h2>{t.aboutPage.focusTitle}</h2>
+      <ul>
+        {t.aboutPage.focus.map((f) => <li>{f}</li>)}
+      </ul>
+
+      <h2>{t.aboutPage.contactTitle}</h2>
+      <p>{t.aboutPage.contact}</p>
+      <ul>
+        <li>Email — <a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li>GitHub — <a href={site.github} target="_blank" rel="noopener noreferrer">Paul-Lin-wj</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

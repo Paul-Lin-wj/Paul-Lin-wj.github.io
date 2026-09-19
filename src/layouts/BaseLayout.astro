@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import { dicts, site, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+}
+const { lang, title, description } = Astro.props;
+const t = dicts[lang];
+const base = lang === 'zh' ? '' : '/en';
+
+// 语言切换：停在当前页面的对应语言版本，而不是一律回首页
+const path = Astro.url.pathname;
+const otherHref =
+  lang === 'zh'
+    ? `/en${path === '/' ? '/' : path}`
+    : path.replace(/^\/en/, '') || '/';
+
+const name = lang === 'zh' ? '林晖洋' : 'Huiyang Lin';
+const fullTitle = `${title} — ${name}`;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="author" content="Huiyang Lin" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(path.replace(/^\/en/, '') || '/', Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en${path.replace(/^\/en/, '')}`, Astro.site)} />
+  </head>
+
+  <body>
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="nav-logo" href={base || '/'}>
+          <span class="dot"></span>{name}
+        </a>
+        <div class="nav-links">
+          <a href={`${base}/#research`}>{t.nav.research}</a>
+          <a href={`${base}/projects`}>{t.nav.projects}</a>
+          <a href={`${base}/about`}>{t.nav.about}</a>
+          <a class="nav-lang" href={otherHref}>{t.nav.other}</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="wrap footer">
+      <div>© {new Date().getFullYear()} {name} · {t.footer.built}</div>
+      <div>
+        <a href={site.github}>GitHub</a>
+        <span> · </span>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </footer>
+  </body>
+</html>
