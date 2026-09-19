@@ -18,7 +18,7 @@ type Dict = {
   };
   research: { kicker: string; title: string; lede: string; cards: Card[] };
   projects: { kicker: string; title: string; lede: string; cards: Card[]; tooling: Card[]; more: string };
-  about: { kicker: string; title: string; lead: string; body: string[]; more: string };
+  about: { body: string[] };
   footer: { built: string; source: string };
   projectsPage: { title: string; lede: string; research: string; tooling: string };
   aboutPage: {
@@ -147,14 +147,9 @@ const zh: Dict = {
     more: '全部项目 →',
   },
   about: {
-    kicker: '03 — About',
-    title: '关于',
-    lead: '武汉大学物理科学与技术学院本科生，微电子科学与工程方向，2023 年入学。',
     body: [
-      '目前在 JUNO（江门中微子实验）方向做能量刻度相关的数据分析工作，同时折腾 agent 工具链——两条线看起来不相干，但我在两边做的是同一件事：让自动化过程变得可追溯、可控制。',
       '物理这边，流水线的每次运行都留档代码快照与全部挑选条件，保证结果能逐位溯源；工程那边，agent 的每一个动作都被约束在明确的工具面里，越权会被拦下。',
     ],
-    more: '完整介绍 →',
   },
   footer: { built: 'Built with Astro', source: '源码' },
   projectsPage: {
@@ -172,7 +167,7 @@ const zh: Dict = {
     ],
     focusTitle: '方向',
     focus: [
-      'JUNO 中微子实验的能量刻度数据分析：从原始数据到非线性曲线的完整链路',
+      '把 JUNO 中微子实验的能量刻度分析自动化：从原始数据到非线性曲线的完整链路',
       '科研流水线的可复现与可审计：代码快照、cut 条件留档、完整性校验',
       'Agent 工具链的约束与安全：受控工具面、多层防线、红队验证',
     ],
@@ -301,14 +296,9 @@ const en: Dict = {
     more: 'All projects →',
   },
   about: {
-    kicker: '03 — About',
-    title: 'About',
-    lead: 'Undergraduate at Wuhan University, School of Physics and Technology, majoring in Microelectronics (enrolled 2023).',
     body: [
-      'I currently work on energy-calibration data analysis for JUNO (Jiangmen Underground Neutrino Observatory), and I also build agent tooling. The two look unrelated, but I am doing the same thing on both sides: making automation traceable and controllable.',
       'In physics, every pipeline run archives a code snapshot and all selection conditions so results can be traced bit-for-bit. In engineering, every agent action is confined to an explicit tool surface, and anything out of bounds is blocked.',
     ],
-    more: 'Full profile →',
   },
   footer: { built: 'Built with Astro', source: 'Source' },
   projectsPage: {
@@ -326,7 +316,7 @@ const en: Dict = {
     ],
     focusTitle: 'Focus',
     focus: [
-      'Energy-calibration analysis for the JUNO neutrino experiment — the full chain from raw data to the non-linearity curve',
+      'Automating the energy-calibration analysis for the JUNO neutrino experiment — the full chain from raw data to the non-linearity curve',
       'Reproducible and auditable research pipelines: code snapshots, recorded cut conditions, integrity checks',
       'Constraint and safety for agent tooling: controlled tool surfaces, layered defences, red-team validation',
     ],
