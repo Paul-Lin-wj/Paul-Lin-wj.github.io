@@ -13,7 +13,7 @@ type Dict = {
   nav: { research: string; projects: string; about: string; other: string; otherHref: string };
   hero: {
     kicker: string; namePrimary: string; nameSecondary: string | null;
-    lede: string; mission: string;
+    lede: string; metaDescription: string;
     chips: string[]; email: string; github: string; ctaAbout: string; ctaProjects: string;
   };
   research: { kicker: string; title: string; lede: string; cards: Card[] };
@@ -35,7 +35,7 @@ const zh: Dict = {
     namePrimary: '林晖洋',
     nameSecondary: 'Huiyang Lin',
     lede: 'AI Agent × 可审计的自动化',
-    mission: '我为 JUNO 中微子实验构建能量刻度流水线，并让 agent 的自动化过程可追溯、可控制。',
+    metaDescription: '中微子物理与可审计的 agent 自动化。JUNO 能量刻度流水线、物理基准测试，以及让自动化过程可追溯的工具链。',
     chips: ['JUNO 能量刻度', '可复现流水线', 'Agent 工具链', 'Android 自动化'],
     email: 'Email',
     github: 'GitHub',
@@ -189,7 +189,7 @@ const en: Dict = {
     namePrimary: 'Huiyang Lin',
     nameSecondary: null,
     lede: 'AI agents × auditable automation',
-    mission: 'I build energy-calibration pipelines for the JUNO neutrino experiment, and make agent automation traceable and controllable.',
+    metaDescription: 'Neutrino physics and auditable agent automation. JUNO energy-calibration pipelines, physics benchmarks, and tooling that keeps automation traceable.',
     chips: ['JUNO calibration', 'Reproducible pipelines', 'Agent tooling', 'Android automation'],
     email: 'Email',
     github: 'GitHub',
