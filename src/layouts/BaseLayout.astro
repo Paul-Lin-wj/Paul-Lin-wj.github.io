@@ -19,6 +19,9 @@ const zhPath = lang === 'zh' ? path : path === '/' ? '/zh/' : `/zh${path}`;
 const enPath = lang === 'zh' ? path.replace(/^\/zh/, '') || '/' : path;
 const otherHref = lang === 'zh' ? enPath : zhPath;
 
+// 当前页面对应的导航项高亮
+const seg = (lang === 'zh' ? path.replace(/^\/zh/, '') : path).split('/')[1];
+
 const name = lang === 'zh' ? '林晖洋' : 'Huiyang Lin';
 const fullTitle = `${title} — ${name}`;
 ---
@@ -41,12 +44,11 @@ const fullTitle = `${title} — ${name}`;
     <nav class="nav">
       <div class="wrap nav-inner">
         <a class="nav-logo" href={base || '/'}>
-          <span class="dot"></span>{name}
+          <span class="dot"></span>{lang === 'zh' ? '主页' : 'HOME'}
         </a>
         <div class="nav-links">
-          <a href={`${base}/#research`}>{t.nav.research}</a>
-          <a href={`${base}/projects`}>{t.nav.projects}</a>
-          <a href={`${base}/about`}>{t.nav.about}</a>
+          <a href={`${base}/projects`} aria-current={seg === 'projects' ? 'page' : undefined}>{t.nav.projects}</a>
+          <a href={`${base}/about`} aria-current={seg === 'about' ? 'page' : undefined}>{t.nav.about}</a>
           <a class="nav-lang" href={otherHref}>{t.nav.other}</a>
         </div>
       </div>

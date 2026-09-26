@@ -9,15 +9,16 @@ interface Props {
   href?: string;
   go?: string;
   subs?: { label: string; href: string }[];
+  featured?: boolean;
 }
-const { tag, title, sub, desc, bullets, stack, href, go, subs } = Astro.props;
+const { tag, title, sub, desc, bullets, stack, href, go, subs, featured } = Astro.props;
 const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 ---
 
 {
   subs?.length ? (
     // 有子项目时不能整卡套链接（<a> 不能嵌套），改成标题与子项目各自成链
-    <div class="card">
+    <div class:list={["card", { featured }]}>
       <p class="tag">{tag}</p>
       <h3><a {...ext(href)} href={href}>{title}</a>{sub && <span class="sub">{sub}</span>}</h3>
       <p>{desc}</p>
@@ -29,7 +30,7 @@ const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'n
       {go && <div class="go"><a {...ext(href)} href={href}>{go}</a></div>}
     </div>
   ) : href ? (
-    <a class="card" href={href} {...ext(href)}>
+    <a class:list={["card", { featured }]} href={href} {...ext(href)}>
       <p class="tag">{tag}</p>
       <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
       <p>{desc}</p>
@@ -38,7 +39,7 @@ const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'n
       {go && <div class="go">{go}</div>}
     </a>
   ) : (
-    <div class="card">
+    <div class:list={["card", { featured }]}>
       <p class="tag">{tag}</p>
       <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
       <p>{desc}</p>

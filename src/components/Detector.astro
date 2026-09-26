@@ -33,11 +33,15 @@ const pmts = Array.from({ length: 20 }, (_, i) => {
   <circle cx={CX} cy={CY} r="165" fill="url(#dglow)" />
   <circle cx={CX} cy={CY} r="100" fill="url(#dcore)" />
 
-  {rings.map(({ r, op }) => (
-    <circle cx={CX} cy={CY} r={r} stroke="#58a6ff" stroke-opacity={op} stroke-width="1" />
-  ))}
+  <g class="rings">
+    {rings.map(({ r, op }) => (
+      <circle cx={CX} cy={CY} r={r} stroke="#58a6ff" stroke-opacity={op} stroke-width="1" />
+    ))}
+  </g>
 
-  {pmts.map(({ x, y }) => (
-    <circle cx={x} cy={y} r="3" fill="#7ee0c8" fill-opacity="0.6" />
-  ))}
+  <g class="pmts">
+    {pmts.map(({ x, y }) => (
+      <circle cx={x} cy={y} r="3" fill="#7ee0c8" fill-opacity="0.6" />
+    ))}
+  </g>
 </svg>

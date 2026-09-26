@@ -75,6 +75,11 @@ img { max-width: 100%; display: block; }
 .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
 .nav-links a { color: var(--fg-2); transition: color .18s; white-space: nowrap; }
 .nav-links a:hover { color: var(--fg); }
+.nav-links a[aria-current="page"] {
+  color: var(--fg);
+  box-shadow: inset 0 -2px 0 var(--accent);
+  padding: 4px 0 2px;
+}
 .nav-lang {
   border: 1px solid var(--border); border-radius: 999px;
   padding: 4px 13px; font-size: 13px; color: var(--fg-2);
@@ -87,11 +92,21 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Hero ──────────────────────────────────────────────── */
-.hero { position: relative; overflow: hidden; padding: 92px 0 84px; }
+.hero { position: relative; overflow: hidden; padding: 108px 0 96px; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; }
 .hero-bg .glow {
   position: absolute; right: -160px; top: -180px; width: 720px; height: 720px;
   background: radial-gradient(circle, rgba(77,143,224,0.22) 0%, rgba(61,120,200,0.08) 45%, transparent 70%);
+  animation: glow-drift 16s ease-in-out infinite alternate;
+}
+.hero-bg .glow-2 {
+  right: auto; top: auto; left: -220px; bottom: -280px; width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(126,224,200,0.10) 0%, rgba(126,224,200,0.03) 45%, transparent 70%);
+  animation-duration: 22s;
+}
+@keyframes glow-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-46px, 34px, 0); }
 }
 .hero-bg .grid {
   position: absolute; inset: 0;
@@ -101,9 +116,20 @@ img { max-width: 100%; display: block; }
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
 }
 .hero-bg .detector { position: absolute; right: 4%; top: 42px; opacity: .55; }
+.detector .rings { transform-origin: 170px 170px; animation: detector-spin 140s linear infinite; }
+.detector .pmts { transform-origin: 170px 170px; animation: detector-spin 220s linear infinite reverse; }
+@keyframes detector-spin { to { transform: rotate(360deg); } }
 @media (max-width: 980px) { .hero-bg .detector { display: none; } }
 
 .hero-inner { position: relative; }
+.hero-inner > * { animation: rise .55s cubic-bezier(.2, .7, .3, 1) both; }
+.hero-inner > *:nth-child(2) { animation-delay: .07s; }
+.hero-inner > *:nth-child(3) { animation-delay: .14s; }
+.hero-inner > *:nth-child(4) { animation-delay: .21s; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 .kicker {
   font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -132,7 +158,7 @@ img { max-width: 100%; display: block; }
   padding: 4px 13px; background: var(--surface);
 }
 
-.pills { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 26px; }
+.pills { display: flex; flex-wrap: wrap; gap: 9px; margin: 26px 0; }
 .pill {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 13.5px; color: var(--fg-2);
@@ -150,7 +176,14 @@ img { max-width: 100%; display: block; }
 .cta a:hover .arrow { transform: translateX(3px); }
 
 /* ── 区块 ──────────────────────────────────────────────── */
-.section { padding: 68px 0; border-top: 1px solid var(--border); }
+.section { position: relative; padding: 68px 0; border-top: 1px solid var(--border); overflow: hidden; }
+.section[data-num]::before {
+  content: attr(data-num);
+  position: absolute; top: 6px; right: -0.08em;
+  font-family: var(--mono); font-size: clamp(7rem, 16vw, 11rem); font-weight: 700;
+  line-height: 1; color: rgba(88, 166, 255, 0.05);
+  pointer-events: none; user-select: none;
+}
 .sec-kicker {
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
   color: var(--accent); margin: 0 0 12px; text-transform: uppercase;
@@ -170,10 +203,27 @@ img { max-width: 100%; display: block; }
 .card {
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface); padding: 24px;
-  transition: border-color .2s, background .2s, transform .2s;
+  transition: border-color .2s, background .2s, transform .2s, box-shadow .2s;
   display: flex; flex-direction: column;
 }
-.card:hover { border-color: var(--border-2); background: var(--surface-2); transform: translateY(-2px); }
+.card:hover {
+  border-color: var(--border-2); background: var(--surface-2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(3, 8, 20, 0.55), 0 0 22px rgba(88, 166, 255, 0.07);
+}
+/* 成果卡：accent 左边条 + 淡渐变，hover 描边扫光 */
+.card.featured {
+  position: relative;
+  border-left: 2px solid var(--accent);
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.075), rgba(126, 224, 200, 0.03) 60%, var(--surface));
+}
+.card.featured::after {
+  content: '';
+  position: absolute; inset: -1px; border-radius: inherit;
+  background: linear-gradient(110deg, transparent 25%, rgba(88, 166, 255, 0.22) 50%, transparent 75%);
+  opacity: 0; transition: opacity .4s; pointer-events: none;
+}
+.card.featured:hover::after { opacity: 1; }
 .card .tag {
   font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); margin: 0 0 11px; font-weight: 500;
@@ -209,6 +259,21 @@ img { max-width: 100%; display: block; }
 .card .go { margin-top: 15px; font-size: 13.5px; color: var(--accent); }
 .card:hover .go { color: var(--accent-2); }
 
+/* ── 滚动进入视口：渐进增强，不支持或偏好减少动效时内容直接可见 ── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .card, .sec-kicker, .section h2, .sec-lede {
+      animation: view-rise .6s cubic-bezier(.2, .7, .3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 38%;
+    }
+  }
+  @keyframes view-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
 /* ── 空状态 ────────────────────────────────────────────── */
 .empty {
   border: 1px dashed var(--border); border-radius: var(--radius);
@@ -227,6 +292,12 @@ img { max-width: 100%; display: block; }
 
 /* ── 内页 ──────────────────────────────────────────────── */
 .page { padding: 66px 0 84px; }
+/* 文字栏收窄并整体离左右缘更远，宽屏下不贴边 */
+.page > h1, .page > .lede, .page > .prose {
+  max-width: 66ch;
+  margin-left: clamp(0px, 4vw, 48px);
+  margin-right: clamp(0px, 4vw, 48px);
+}
 .page h1 { font-size: clamp(1.9rem, 4.2vw, 2.6rem); font-weight: 600; margin: 0 0 14px; letter-spacing: -0.015em; }
 .page .lede { margin-bottom: 44px; }
 .prose { max-width: 72ch; }

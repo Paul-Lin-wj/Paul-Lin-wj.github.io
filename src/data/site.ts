@@ -6,17 +6,17 @@ export const site = {
 
 export type Lang = 'zh' | 'en';
 
-type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string; subs?: { label: string; href: string }[] };
+type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string; subs?: { label: string; href: string }[]; featured?: boolean };
 
 type Dict = {
   htmlLang: string;
-  nav: { research: string; projects: string; about: string; other: string; otherHref: string };
+  nav: { projects: string; about: string; other: string; otherHref: string };
   hero: {
     kicker: string; namePrimary: string; nameSecondary: string | null;
-    lede: string; metaDescription: string;
-    chips: string[]; email: string; github: string; ctaAbout: string; ctaProjects: string;
+    metaDescription: string;
+    email: string; github: string; ctaAbout: string; ctaProjects: string;
   };
-  research: { kicker: string; title: string; lede: string; cards: Card[] };
+  publication: { kicker: string; title: string; card: Card };
   projects: { kicker: string; title: string; lede: string; cards: Card[]; tooling: Card[]; more: string };
   footer: { built: string; source: string };
   projectsPage: { title: string; lede: string; research: string; tooling: string };
@@ -28,48 +28,32 @@ type Dict = {
 
 const zh: Dict = {
   htmlLang: 'zh-CN',
-  nav: { research: '研究方向', projects: '项目', about: '关于', other: 'English', otherHref: '/en/' },
+  nav: { projects: '项目', about: '关于', other: 'English', otherHref: '/en/' },
   hero: {
     kicker: '武汉大学 · 物理科学与技术学院 · 微电子科学与工程',
     namePrimary: '林晖洋',
     nameSecondary: 'Huiyang Lin',
-    lede: 'AI Agent × 可审计的自动化',
-    metaDescription: '中微子物理与可审计的 agent 自动化。JUNO 能量刻度流水线、物理基准测试，以及让自动化过程可追溯的工具链。',
-    chips: ['JUNO 能量刻度', '可复现流水线', 'Agent 工具链', 'Android 自动化'],
+    metaDescription: '中微子物理与可审计的 agent 自动化。JUNO 能量刻度流水线、ParticleBench 物理基准（ICLR 2027 投稿），以及让自动化过程可追溯的工具链。',
     email: 'Email',
     github: 'GitHub',
     ctaAbout: '更多关于我',
     ctaProjects: '查看项目',
   },
-  research: {
-    kicker: '01 — Research',
-    title: '研究方向',
-    lede: '两个方向，一个共同点：让复杂过程的每一步都可追溯。',
-    cards: [
-      {
-        tag: 'JUNO · 流程自动化',
-        title: '把能量刻度分析自动化',
-        desc: '把 JUNO ACU 伽马源刻度的整套分析流程自动化：从 EDM 到 E_true = f(E_rec)，覆盖波形与事例重建、26B 能量修正、事例挑选、物理 QA、峰位拟合与非线性全局拟合。刻度源覆盖 Ge68 / Cs137 / Mn54 / Co60 / K40 五种单能源与 AmC 关联对三峰。',
-        bullets: [
-          '五种单能源 + AmC 关联对三峰的挑选与拟合',
-          '26B Finalcorrection 与非线性全局拟合',
-          '每一步挑选条件都留档可查',
-        ],
-      },
-      {
-        tag: 'Agent · 工程',
-        title: '可审计的自动化',
-        desc: '让不可信的自动化过程变得可追溯、可控制。物理流水线每次运行留档代码快照与全部 cut 条件；手机操控 agent 用白名单工具面与多层防线约束模型行为。',
-        bullets: [
-          '每次运行产出代码快照（含 sha256）与完整性审计',
-          '工具面白名单 + 受保护应用黑名单',
-          '红队三轮实测的防线验证',
-        ],
-      },
-    ],
+  publication: {
+    kicker: '02 — Publication',
+    title: '成果',
+    card: {
+      tag: 'ICLR 2027 投稿',
+      title: 'ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks',
+      sub: 'OpenReview',
+      desc: '面向实验粒子物理长链路计算任务的 LLM agent 基准：agent 须产出可执行的分析流程而非文字答案；任务自带 verifier 把正确性与性能分开评分，最终提交冻结后在 held-out 数据上重跑。Ding, Li, Sun, Zhang, Cheng, Nip, Lin, Liang, Chen.',
+      href: 'https://openreview.net/forum?id=07nrkcmOOq',
+      go: 'OpenReview →',
+      featured: true,
+    },
   },
   projects: {
-    kicker: '02 — Projects',
+    kicker: '01 — Projects',
     title: '项目',
     lede: '科研流水线与工具链。全部代码在 GitHub 上公开。',
     cards: [
@@ -87,13 +71,17 @@ const zh: Dict = {
         ],
       },
       {
-        tag: '物理 × Agent',
-        title: 'jbench_plank2018',
+        tag: '物理 × Agent · ICLR 2027 投稿',
+        title: 'ParticleBench_planck2018',
         sub: 'Python',
-        desc: 'Planck 2018 CMB 基准：用宇宙学参数推断来测 AI agent 的物理推理能力。CAMB 理论谱 + 银河前景 + 仪器噪声，参数在 Planck 2018 ±3σ 内随机采样防止背题；真值由评分系统独占，agent 不可见。',
+        desc: 'ParticleBench 的 Planck 2018 CMB 任务：用宇宙学参数推断测 AI agent 的长链路物理推理。CAMB 理论谱 + 银河前景 + 仪器噪声，参数在 Planck 2018 ±3σ 内随机采样防止背题；verifier 把正确性与性能分开评分，最终提交冻结后在 held-out 数据上重跑，真值 agent 全程不可见。',
         stack: ['Python', 'CAMB', 'benchmark', 'agent'],
-        href: 'https://github.com/Paul-Lin-wj/jbench_plank2018',
+        href: 'https://github.com/Paul-Lin-wj/ParticleBench_planck2018',
         go: '查看仓库 →',
+        subs: [
+          { label: '论文 — ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks（ICLR 2027 投稿，OpenReview）', href: 'https://openreview.net/forum?id=07nrkcmOOq' },
+          { label: 'ParticleBench_planck2018 — Planck 2018 CMB 任务仓库', href: 'https://github.com/Paul-Lin-wj/ParticleBench_planck2018' },
+        ],
       },
       {
         tag: 'Agent · 工具链',
@@ -160,11 +148,7 @@ const zh: Dict = {
       ['2023 — 至今', '武汉大学 · 物理科学与技术学院 · 微电子科学与工程'],
     ],
     focusTitle: '方向',
-    focus: [
-      '把 JUNO 中微子实验的能量刻度分析自动化：从原始数据到非线性曲线的完整链路',
-      '科研流水线的可复现与可审计：代码快照、cut 条件留档、完整性校验',
-      'Agent 工具链的约束与安全：受控工具面、多层防线、红队验证',
-    ],
+    focus: ['高能物理', 'Agent'],
     contactTitle: '联系',
     contact: '技术讨论、合作或任何问题，欢迎邮件联系。',
   },
@@ -172,48 +156,32 @@ const zh: Dict = {
 
 const en: Dict = {
   htmlLang: 'en',
-  nav: { research: 'Research', projects: 'Projects', about: 'About', other: '中文', otherHref: '/' },
+  nav: { projects: 'Projects', about: 'About', other: '中文', otherHref: '/' },
   hero: {
     kicker: 'Wuhan University · School of Physics and Technology · Microelectronics',
     namePrimary: 'Huiyang Lin',
     nameSecondary: null,
-    lede: 'AI agents × auditable automation',
-    metaDescription: 'Neutrino physics and auditable agent automation. JUNO energy-calibration pipelines, physics benchmarks, and tooling that keeps automation traceable.',
-    chips: ['JUNO calibration', 'Reproducible pipelines', 'Agent tooling', 'Android automation'],
+    metaDescription: 'Neutrino physics and auditable agent automation. JUNO energy-calibration pipelines, the ParticleBench physics benchmark (ICLR 2027 submission), and tooling that keeps automation traceable.',
     email: 'Email',
     github: 'GitHub',
     ctaAbout: 'More about me',
     ctaProjects: 'View projects',
   },
-  research: {
-    kicker: '01 — Research',
-    title: 'Research',
-    lede: 'Two directions, one common thread: making every step of a complex process traceable.',
-    cards: [
-      {
-        tag: 'JUNO · Pipeline automation',
-        title: 'Automating the energy-calibration analysis',
-        desc: 'Automating the full JUNO ACU gamma-source calibration analysis: the chain from EDM to E_true = f(E_rec), covering waveform and event reconstruction, 26B energy correction, event selection, physics QA, peak fitting and global non-linearity fitting. Sources cover five single-energy gammas (Ge68 / Cs137 / Mn54 / Co60 / K40) plus the AmC coincidence triplets.',
-        bullets: [
-          'Selection and fitting for five single-energy sources + AmC triplets',
-          '26B Finalcorrection and global non-linearity fitting',
-          'Every selection cut is recorded and auditable',
-        ],
-      },
-      {
-        tag: 'Agents · Engineering',
-        title: 'Auditable automation',
-        desc: 'Making untrusted automation traceable and controllable. The physics pipeline archives a code snapshot and all cut conditions on every run; the phone-control agent constrains model behaviour through a whitelisted tool surface and layered defences.',
-        bullets: [
-          'Per-run code snapshot (with sha256) and integrity audit',
-          'Whitelisted tool surface + protected-app blacklist',
-          'Defences validated by three rounds of red-teaming',
-        ],
-      },
-    ],
+  publication: {
+    kicker: '02 — Publication',
+    title: 'Publication',
+    card: {
+      tag: 'ICLR 2027 submission',
+      title: 'ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks',
+      sub: 'OpenReview',
+      desc: 'A benchmark for LLM agents on long-horizon computational tasks in experimental particle physics: agents must produce executable analysis procedures, not textual answers; task-specific verifiers separate correctness from performance, and final submissions are frozen and re-executed on held-out data. Ding, Li, Sun, Zhang, Cheng, Nip, Lin, Liang, Chen.',
+      href: 'https://openreview.net/forum?id=07nrkcmOOq',
+      go: 'OpenReview →',
+      featured: true,
+    },
   },
   projects: {
-    kicker: '02 — Projects',
+    kicker: '01 — Projects',
     title: 'Projects',
     lede: 'Research pipelines and tooling. All source is public on GitHub.',
     cards: [
@@ -231,13 +199,17 @@ const en: Dict = {
         ],
       },
       {
-        tag: 'Physics × Agents',
-        title: 'jbench_plank2018',
+        tag: 'Physics × Agents · ICLR 2027 submission',
+        title: 'ParticleBench_planck2018',
         sub: 'Python',
-        desc: 'A Planck 2018 CMB benchmark that tests an AI agent\'s physics reasoning through cosmological parameter inference. CAMB theory spectra plus galactic foregrounds and instrument noise, with parameters sampled randomly within Planck 2018 ±3σ so the task cannot be memorised; ground truth is held by the scoring system and never shown to the agent.',
+        desc: 'The Planck 2018 CMB task of ParticleBench: testing an AI agent\'s long-horizon physics reasoning through cosmological parameter inference. CAMB theory spectra plus galactic foregrounds and instrument noise, with parameters sampled randomly within Planck 2018 ±3σ so the task cannot be memorised; a task-specific verifier separates correctness from performance, and final submissions are frozen and re-executed on held-out data the agent never sees.',
         stack: ['Python', 'CAMB', 'benchmark', 'agent'],
-        href: 'https://github.com/Paul-Lin-wj/jbench_plank2018',
+        href: 'https://github.com/Paul-Lin-wj/ParticleBench_planck2018',
         go: 'View repository →',
+        subs: [
+          { label: 'Paper — ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks (ICLR 2027 submission, OpenReview)', href: 'https://openreview.net/forum?id=07nrkcmOOq' },
+          { label: 'ParticleBench_planck2018 — the Planck 2018 CMB task repository', href: 'https://github.com/Paul-Lin-wj/ParticleBench_planck2018' },
+        ],
       },
       {
         tag: 'Agents · Tooling',
@@ -304,11 +276,7 @@ const en: Dict = {
       ['2023 — present', 'Wuhan University · School of Physics and Technology · Microelectronics'],
     ],
     focusTitle: 'Focus',
-    focus: [
-      'Automating the energy-calibration analysis for the JUNO neutrino experiment — the full chain from raw data to the non-linearity curve',
-      'Reproducible and auditable research pipelines: code snapshots, recorded cut conditions, integrity checks',
-      'Constraint and safety for agent tooling: controlled tool surfaces, layered defences, red-team validation',
-    ],
+    focus: ['High-energy physics', 'Agents'],
     contactTitle: 'Contact',
     contact: 'For technical discussion, collaboration, or anything else — email is best.',
   },
