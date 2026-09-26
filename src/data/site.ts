@@ -6,7 +6,7 @@ export const site = {
 
 export type Lang = 'zh' | 'en';
 
-type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string; subs?: { label: string; href: string }[]; featured?: boolean };
+type Card = { tag: string; title: string; sub?: string; desc: string; bullets?: string[]; stack?: string[]; href?: string; go?: string; subs?: { label: string; href: string }[]; featured?: boolean; authors?: string };
 
 type Dict = {
   htmlLang: string;
@@ -46,9 +46,10 @@ const zh: Dict = {
       tag: 'ICLR 2027 投稿',
       title: 'ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks',
       sub: 'OpenReview',
-      desc: '面向实验粒子物理长链路计算任务的 LLM agent 基准：agent 须产出可执行的分析流程而非文字答案；任务自带 verifier 把正确性与性能分开评分，最终提交冻结后在 held-out 数据上重跑。Ding, Li, Sun, Zhang, Cheng, Nip, Lin, Liang, Chen.',
+      desc: '面向实验粒子物理长链路计算任务的 LLM agent 基准：agent 须产出可执行的分析流程而非文字答案；任务自带 verifier 把正确性与性能分开评分，最终提交冻结后在 held-out 数据上重跑。',
+      authors: 'Xuefeng Ding, Dian Li, Guangbao Sun, Rongzhou Zhang, Xiufu Cheng, ChonHong Nip, Huiyang Lin, Dongbo Liang, Guangyao Chen',
       href: 'https://openreview.net/forum?id=07nrkcmOOq',
-      go: 'OpenReview →',
+      go: 'OpenReview ↗',
       featured: true,
     },
   },
@@ -174,9 +175,10 @@ const en: Dict = {
       tag: 'ICLR 2027 submission',
       title: 'ParticleBench: Evaluating LLM Agents on Experimental Particle Physics Tasks',
       sub: 'OpenReview',
-      desc: 'A benchmark for LLM agents on long-horizon computational tasks in experimental particle physics: agents must produce executable analysis procedures, not textual answers; task-specific verifiers separate correctness from performance, and final submissions are frozen and re-executed on held-out data. Ding, Li, Sun, Zhang, Cheng, Nip, Lin, Liang, Chen.',
+      desc: 'A benchmark for LLM agents on long-horizon computational tasks in experimental particle physics: agents must produce executable analysis procedures, not textual answers; task-specific verifiers separate correctness from performance, and final submissions are frozen and re-executed on held-out data.',
+      authors: 'Xuefeng Ding, Dian Li, Guangbao Sun, Rongzhou Zhang, Xiufu Cheng, ChonHong Nip, Huiyang Lin, Dongbo Liang, Guangyao Chen',
       href: 'https://openreview.net/forum?id=07nrkcmOOq',
-      go: 'OpenReview →',
+      go: 'OpenReview ↗',
       featured: true,
     },
   },

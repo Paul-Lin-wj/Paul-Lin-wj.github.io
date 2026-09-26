@@ -26,6 +26,8 @@
           'Noto Sans CJK SC', sans-serif;
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
           'Liberation Mono', monospace;
+  --serif: 'Newsreader', 'Georgia', 'Times New Roman',
+           'Songti SC', 'Noto Serif CJK SC', 'SimSun', serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -115,6 +117,18 @@ img { max-width: 100%; display: block; }
   mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
 }
+.hero-bg .tracks {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+}
+.hero-bg .track { animation: track-drift 16s ease-in-out infinite alternate; }
+.hero-bg .track.t2 { animation-duration: 21s; animation-delay: -8s; }
+.hero-bg .track.t3 { animation-duration: 26s; animation-delay: -14s; }
+@keyframes track-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-38px); }
+}
 .hero-bg .detector { position: absolute; right: 4%; top: 42px; opacity: .55; }
 .detector .rings { transform-origin: 170px 170px; animation: detector-spin 140s linear infinite; }
 .detector .pmts { transform-origin: 170px 170px; animation: detector-spin 220s linear infinite reverse; }
@@ -136,11 +150,12 @@ img { max-width: 100%; display: block; }
   color: var(--accent); margin: 0 0 20px; font-weight: 500;
 }
 .hero h1 {
+  font-family: var(--serif);
   font-size: clamp(2.5rem, 6.2vw, 3.9rem);
-  line-height: 1.1; letter-spacing: -0.02em; font-weight: 600;
+  line-height: 1.1; letter-spacing: -0.01em; font-weight: 500;
   margin: 0 0 16px;
 }
-.hero h1 .name-primary:lang(zh) { letter-spacing: 0.06em; }
+.hero h1 .name-primary:lang(zh) { letter-spacing: 0.1em; }
 .hero h1 .name-secondary {
   display: block; font-size: 0.42em; font-weight: 400;
   letter-spacing: 0.01em; color: var(--fg-3); margin-top: 12px;
@@ -189,8 +204,9 @@ img { max-width: 100%; display: block; }
   color: var(--accent); margin: 0 0 12px; text-transform: uppercase;
 }
 .section h2 {
-  font-size: clamp(1.5rem, 3.2vw, 1.95rem); font-weight: 600;
-  letter-spacing: -0.01em; margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: clamp(1.55rem, 3.2vw, 2rem); font-weight: 500;
+  letter-spacing: 0; margin: 0 0 12px;
 }
 .sec-lede { color: var(--fg-3); font-size: 15px; max-width: 66ch; margin: 0 0 34px; }
 
@@ -224,6 +240,18 @@ img { max-width: 100%; display: block; }
   opacity: 0; transition: opacity .4s; pointer-events: none;
 }
 .card.featured:hover::after { opacity: 1; }
+/* preprint 样式：标题衬线、作者行斜体、venue 徽章 */
+.card.featured h3 { font-family: var(--serif); font-weight: 500; font-size: 19.5px; letter-spacing: 0; }
+.card.featured .tag {
+  display: inline-block;
+  padding: 3px 10px; border-radius: 999px;
+  border: 1px solid rgba(88, 166, 255, 0.35);
+  background: rgba(88, 166, 255, 0.09);
+}
+.card .authors {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: 13.5px; color: var(--fg-4); margin: 0 0 11px;
+}
 .card .tag {
   font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); margin: 0 0 11px; font-weight: 500;
@@ -290,8 +318,18 @@ img { max-width: 100%; display: block; }
 .footer a { color: var(--fg-3); }
 .footer a:hover { color: var(--accent); }
 
+.run-meta {
+  padding: 0 0 26px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--fg-4);
+  opacity: 0.55;
+}
+
 /* ── 内页 ──────────────────────────────────────────────── */
 .page { padding: 66px 0 84px; }
+.page h1 { font-family: var(--serif); font-weight: 500; }
 /* 文字栏收窄并整体离左右缘更远，宽屏下不贴边 */
 .page > h1, .page > .lede, .page > .prose {
   max-width: 66ch;

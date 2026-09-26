@@ -10,8 +10,9 @@ interface Props {
   go?: string;
   subs?: { label: string; href: string }[];
   featured?: boolean;
+  authors?: string;
 }
-const { tag, title, sub, desc, bullets, stack, href, go, subs, featured } = Astro.props;
+const { tag, title, sub, desc, bullets, stack, href, go, subs, featured, authors } = Astro.props;
 const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 ---
 
@@ -21,6 +22,7 @@ const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'n
     <div class:list={["card", { featured }]}>
       <p class="tag">{tag}</p>
       <h3><a {...ext(href)} href={href}>{title}</a>{sub && <span class="sub">{sub}</span>}</h3>
+      {authors && <p class="authors">{authors}</p>}
       <p>{desc}</p>
       {bullets && <ul>{bullets.map((b) => <li>{b}</li>)}</ul>}
       {stack && <div class="stack">{stack.map((s) => <span>{s}</span>)}</div>}
@@ -33,6 +35,7 @@ const ext = (u?: string) => (u?.startsWith('http') ? { target: '_blank', rel: 'n
     <a class:list={["card", { featured }]} href={href} {...ext(href)}>
       <p class="tag">{tag}</p>
       <h3>{title}{sub && <span class="sub">{sub}</span>}</h3>
+      {authors && <p class="authors">{authors}</p>}
       <p>{desc}</p>
       {bullets && <ul>{bullets.map((b) => <li>{b}</li>)}</ul>}
       {stack && <div class="stack">{stack.map((s) => <span>{s}</span>)}</div>}

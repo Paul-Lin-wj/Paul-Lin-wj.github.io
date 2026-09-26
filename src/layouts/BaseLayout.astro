@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import '@fontsource/newsreader/500.css';
+import '@fontsource/newsreader/600.css';
 import { dicts, site, type Lang } from '../data/site';
 
 interface Props {
@@ -66,5 +68,8 @@ const fullTitle = `${title} — ${name}`;
         <a href={`mailto:${site.email}`}>{site.email}</a>
       </div>
     </footer>
+    <div class="wrap run-meta" aria-hidden="true">
+      <code>site v1.1 · {new Date().toISOString().slice(0, 10)} · {lang}/{(lang === 'zh' ? 'en' : 'zh')} · astro@7</code>
+    </div>
   </body>
 </html>
